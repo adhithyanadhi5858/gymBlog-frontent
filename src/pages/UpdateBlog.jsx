@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AxiosInstance } from "../../config/AxiosInstance";
+import toast, { Toaster } from 'react-hot-toast';
 
 const UpdateBlog = () => {
   const { id } = useParams();
@@ -53,17 +54,18 @@ const UpdateBlog = () => {
         headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true,
       });
-      alert("Blog updated!");
-      console.log("update blog===",res.data)
+      toast.success("Blog updated!");
+      console.log("update blog===", res.data)
       navigate("/user/my-blog");
     } catch (err) {
       console.error("Update error:", err.message);
-      alert("Failed to update blog.");
+      toast.error("Failed to update blog.");
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex justify-center items-center px-4 py-16">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="max-w-xl w-full bg-white/10 mt-10 backdrop-blur-lg border border-white/20 p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-8 text-white">Update Blog</h2>
 

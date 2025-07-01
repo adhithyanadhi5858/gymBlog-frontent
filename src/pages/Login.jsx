@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../../config/AxiosInstance";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../features/userSlice";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,19 +19,24 @@ const Login = () => {
         .then(res => {
           console.log(res.data)
           dispatch(saveUser(res.data.UserExist))
-          alert("Login Succesfull")
-          setTimeout(()=> navigate('/user/profile'),1000)
+          toast.success("SignIn Successful!")
+          setTimeout(() => navigate('/user/profile'), 1000)
+        })
+        .catch(err => {
+          console.log(err)
+          toast.error("SigIn Failed!")
         })
 
     } catch (error) {
-
-    console.log("Login error===",error.message)
+      toast.error("Somthing Went Wrong!")
+      console.log("Login error===", error.message)
 
     }
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex justify-center items-center px-4">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="max-w-md w-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center text-white mb-8"> Gym<span className="text-red-500">Blog</span></h2>
 

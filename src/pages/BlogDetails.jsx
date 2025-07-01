@@ -11,6 +11,7 @@ const BlogDetails = () => {
     const fetchBlog = async () => {
       try {
         const res = await AxiosInstance.get(`/blog/single-blog/${id}`);
+        console.log(res.data)
         setBlog(res.data.Blog);
         setLoading(false);
       } catch (err) {

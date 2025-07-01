@@ -48,7 +48,7 @@ const Home = () => {
                 <h2 className="card-title text-white">{item.title}</h2>
                 <p>{item.content} </p>
                 <div className="card-actions justify-end">
-                  <Link to={`/blog/${item.id}`} className="btn btn-sm btn-primary">Read More</Link>
+                  <Link to={`blog-details/${item._id}`} className="btn btn-sm btn-primary">Read More</Link>
                 </div>
               </div>
             </div>

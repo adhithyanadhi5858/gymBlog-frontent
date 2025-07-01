@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AxiosInstance } from "../../config/AxiosInstance";
+import toast, { Toaster } from 'react-hot-toast';
 
 const MyBlogs = () => {
   const [myBlogs, setMyBlogs] = useState([]);
@@ -25,7 +26,9 @@ const MyBlogs = () => {
       await AxiosInstance.delete(`blog/delete/${id}`, {
         withCredentials: true,
       });
+      toast.success("Blog Deleted")
       setMyBlogs(myBlogs.filter((blog) => blog._id !== id));
+
     } catch (err) {
       console.error("Error deleting blog:", err.message);
     }
@@ -37,6 +40,7 @@ const MyBlogs = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white px-4 py-16">
+      <Toaster position="top-center" reverseOrder={false} />
       <h2 className="text-4xl mt-5 font-bold text-center mb-10">📝 My Blogs</h2>
 
       {myBlogs.length === 0 ? (

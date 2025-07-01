@@ -35,7 +35,7 @@ const BlogList = () => {
               <h2 className="card-title text-white">{blog?.title}</h2>
               <p>{blog?.content}</p>
               <div className="card-actions justify-end">
-                <Link to={`blog-details/${blog._id}`} className="btn btn-sm btn-primary">Read More</Link>
+                <Link to={`/blog-details/${blog._id}`} className="btn btn-sm btn-primary">Read More</Link>
               </div>
             </div>
           </div>

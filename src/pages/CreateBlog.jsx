@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosInstance } from "../../config/AxiosInstance";
+import toast, { Toaster } from 'react-hot-toast';
 
 const CreateBlog = () => {
 
@@ -20,7 +21,7 @@ const CreateBlog = () => {
 
       console.log(title,content,image,category)
 
-      alert("All Field Required")
+      toast.error("All Field Required")
 
       return;
     }
@@ -36,22 +37,24 @@ const CreateBlog = () => {
       const res = await AxiosInstance.post("blog/create-blog", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      alert("Blog Created Successfully")
       setTitle("")
       setCategory("")
       setContent("")
       setImage(null)
-      navigate("/blog-list")
+      toast.success("Blog Created Successfull")
+      setTimeout(()=>navigate("/blog-list"),3000)
+      
 
     } catch (err) {
       console.error(err);
-      alert("Error creating blog");
+      toast.error("Blog Creating Failed!");
     }
   };
 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex justify-center items-center px-4 py-16">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="max-w-xl w-full bg-white/10 mt-10 backdrop-blur-lg border border-white/20 p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-8 text-white">Create Blog</h2>
 

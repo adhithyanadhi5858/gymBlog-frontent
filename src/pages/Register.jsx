@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../../config/AxiosInstance";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../features/userSlice";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
 
@@ -17,20 +18,23 @@ const Register = () => {
         .then(res => {
           console.log(res.data)
           dispatch(saveUser(res.data.newUser))
-          alert("Registered Successfully")
+          toast.success("Signup Succesful!")
           setTimeout(() => navigate("/user/profile"), 2000)
 
         }).catch(err => {
           console.log("registerError ===", err)
+          toast.error("SignUp Failed!")
         })
     } catch (error) {
-      alert(error.message)
+      console.log(error.message)
+      toast.error("Something Went Wrong!")
     }
   }
 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex justify-center items-center px-4">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="max-w-md w-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-lg mt-10 shadow-lg">
         <h2 className="text-3xl font-bold text-center text-white mb-8">Gym<span className="text-red-500">Blog</span></h2>
 

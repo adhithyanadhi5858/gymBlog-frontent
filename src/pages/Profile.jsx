@@ -3,6 +3,7 @@ import { AxiosInstance } from "../../config/AxiosInstance";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../features/userSlice";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -28,9 +29,9 @@ const Profile = () => {
     try {
 
       const res = await AxiosInstance.get("user/logout")
-      alert("Logout Succesfull")
       dispatch(clearUser())
-      navigate("/login")
+      toast.success("Logout Successful!")
+      setTimeout(()=>navigate("/login"),3000)
 
     } catch (error) {
       console.log("Logout Error===", error.message)
@@ -47,6 +48,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-16 px-4 flex justify-center items-center">
+      <Toaster position="top-center" reverseOrder={false}/>
       <div className="max-w-xl w-full bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-lg shadow-xl">
         <div className="flex justify-center mb-6">
           <div className="avatar">
